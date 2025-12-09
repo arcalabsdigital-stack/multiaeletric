@@ -388,16 +388,6 @@
                 position: relative; 
                 margin-bottom: 5px; /* Espaço abaixo para mensagem */
             } /* Ajuste para mobile no header */
-            .sound-message { 
-                font-size: 14px; 
-                padding: 10px 20px; 
-                position: absolute; 
-                top: 100%; 
-                left: 50%; 
-                transform: translateX(-50%); 
-                z-index: 1002;
-                white-space: nowrap;
-            } /* Ajuste mobile para abaixo do speaker */
             .header-whatsapp-button { 
                 padding: 8px 10px; /* Reduzido ainda mais para compactar largura */
                 font-size: 10px; 
@@ -431,7 +421,6 @@
         @media (max-width: 480px) {
             .specs-table { overflow-x: auto; display: block; }
             .compare-grid { grid-template-columns: 1fr; }
-            .sound-message { font-size: 12px; padding: 8px 16px; }
             .compare-frame h3 { font-size: 24px; } /* Mais ajuste no mobile pequeno */
             .compare-frame .specs-table { 
                 font-size: 10px; 
@@ -472,36 +461,6 @@
         .speaker-button.paused i {
             transform: rotate(180deg);
         }
-        /* Estilos para a Mensagem "Ligue o som" - Ajustada: centro X na tela, altura do header, 40s visível */
-        .sound-message {
-            position: fixed; /* Fixa na viewport para não rolar com o conteúdo */
-            top: 50%; /* Centraliza verticalmente na altura do header (ajustado para ~50px de altura total do header) */
-            left: 50%; /* Centro exato no eixo X da tela */
-            transform: translate(-50%, -50%); /* Precisão no centro horizontal e vertical relativo ao header */
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 20px;
-            border: 1px solid var(--gold);
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            z-index: 1001; /* Sobre o header sem interferir */
-            display: none;
-            white-space: nowrap;
-            animation: fadeInOut 0.5s ease-in-out;
-            pointer-events: none; /* Não interfere em cliques no header */
-        }
-        @media (min-width: 1024px) {
-            .sound-message {
-                top: calc(50px / 2); /* Metade da altura estimada do header no desktop para alinhamento preciso */
-            }
-        }
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-        }
     </style>
 </head>
 <body>
@@ -534,8 +493,6 @@
             <a href="https://wa.me/5547996379837?text=Olá, preciso de um orçamento para scooters elétricas da MultiA Eletric!" target="_blank" class="header-whatsapp-button" aria-label="Abrir WhatsApp para orçamento da MultiA Eletric">
                 Receber Orçamento
             </a>
-            <!-- Mensagem "Ligue o som" integrada no header (aparece por 40s) -->
-            <div id="soundMessage" class="sound-message">Ligue o som</div>
         </div>
         <div class="hamburger" id="hamburger" aria-label="Abrir/Fechar menu de navegação">
             <span></span>
@@ -949,7 +906,7 @@
     const backgroundAudio = document.getElementById('backgroundAudio');
     const speakerButton = document.getElementById('speakerButton');
     const speakerIcon = document.getElementById('speakerIcon');
-    const soundMessage = document.getElementById('soundMessage');
+    // const soundMessage = document.getElementById('soundMessage'); // Removed as per request
 
     // Iniciar áudio em autoplay (muted para compatibilidade com políticas de navegador)
     backgroundAudio.muted = true;
@@ -981,12 +938,12 @@
     });
 
     // Mostrar mensagem "Ligue o som" por exatamente 40 segundos ao carregar (agora no header)
-    window.addEventListener('load', () => {
-        soundMessage.style.display = 'block';
-        setTimeout(() => {
-            soundMessage.style.display = 'none';
-        }, 40000); // 40 segundos
-    });
+    // window.addEventListener('load', () => { // Removed as per request
+    //     soundMessage.style.display = 'block';
+    //     setTimeout(() => {
+    //         soundMessage.style.display = 'none';
+    //     }, 40000); // 40 segundos
+    // }); // Removed as per request
 
     // Hamburger Menu
     const hamburger = document.getElementById('hamburger');
